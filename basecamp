@@ -68,7 +68,7 @@ d-i partman-md/device_remove_md boolean true
 d-i partman-lvm/confirm boolean true
 d-i partman-auto-lvm/guided_size string max
 d-i partman-auto-lvm/new_vg_name string debian
-d-i partman-auto/disk string /dev/nvme0
+d-i partman-auto/disk string /dev/nvme0n1
 d-i partman-auto/choose_recipe select boot-crypto
 
 
