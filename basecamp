@@ -113,7 +113,7 @@ d-i partman/confirm_nooverwrite boolean true
 ### Package selection
 tasksel tasksel/first multiselect standard mate-desktop laptop
 # Individual additional packages to install
-d-i pkgsel/include string git ansible transmission borgbackup shutter calibre mosh caja-admin caja-rename caja-open-terminal curl taskwarrior ledger-cli yt-dlp i3-wm rofi
+d-i pkgsel/include string git ansible transmission borgbackup shutter calibre mosh caja-admin caja-rename caja-open-terminal curl taskwarrior ledger yt-dlp i3-wm rofi
 d-i pkgsel/upgrade select full-upgrade
 d-i pkgsel/update-policy select none
 d-i pkgsel/updatedb boolean true
