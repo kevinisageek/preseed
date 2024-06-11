@@ -18,7 +18,7 @@ d-i netcfg/dhcp_failed note
 # Set a hostname
 d-i netcfg/get_hostname string basecamp
 d-i netcfg/get_domain string kevinisageek.org
-d-i netcfg/hostname string nomadic
+d-i netcfg/hostname string basecamp
 
 ### Apt setup
 d-i mirror/country string manual
