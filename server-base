@@ -37,7 +37,6 @@ d-i passwd/root-login boolean false
 # To create a normal user account.
 d-i passwd/user-fullname string Kevin
 d-i passwd/username string kevin
-d-i passwd/user-password-crypted password $y$j9T$KsmXU6YAry51Di8CAtl2o0$qehn5wzdjkcYw7CfLvMgLbWEU65b8Np0s58kttfcYWB
 
 ### Clock and time zone setup
 # Set hardware clock to UTC
@@ -68,33 +67,6 @@ d-i partman-auto-lvm/guided_size string max
 d-i partman-auto-lvm/new_vg_name string debian
 d-i partman-auto/disk string /dev/sda
 
-# 512mb EFI, 1G /boot, 8G swap, rest for root
-d-i partman-auto/expert_recipe string \
-boot-crypto :: \
-  512 50 512 fat32 \
-          $primary{ } $bootable{ } \
-          method{ efi } format{ } \
-          mountpoint{ /boot/efi } \
-  . \
-  1024 1024 1024 ext4 \
-          $primary{ } $bootable{ } \
-          method{ format } format{ } \
-          use_filesystem{ } filesystem{ ext4 } \
-          mountpoint{ /boot } \
-  . \
-  8192 8192 8192 linux-swap \
-          $lvmok{ } lv_name{ swap } \
-          in_vg { debian } \
-          method{ swap } format{ } \
-  . \
-  80896 80896 -1 ext4 \
-          $lvmok{ } lv_name{ root } \
-          in_vg { debian } \
-          method{ format } format{ } \
-          use_filesystem{ } filesystem{ ext4 } \
-          mountpoint{ / } \
-  . \
-
 d-i partman-partitioning/confirm_write_new_label boolean true
 d-i partman/choose_partition select finish
 d-i partman/confirm boolean true
@@ -109,7 +81,7 @@ d-i partman/confirm_nooverwrite boolean true
 ### Package selection
 tasksel tasksel/first multiselect standard 
 # Individual additional packages to install
-d-i pkgsel/include string git avahi-daemon openssh-server build-essential
+d-i pkgsel/include string git avahi-daemon openssh-server build-essential htop
 d-i pkgsel/upgrade select full-upgrade
 d-i pkgsel/update-policy select none
 d-i pkgsel/updatedb boolean true
