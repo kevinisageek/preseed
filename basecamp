@@ -40,7 +40,6 @@ d-i passwd/root-login boolean false
 d-i passwd/user-fullname string Kevin
 d-i passwd/username string kevin
 
-
 ### Clock and time zone setup
 # Set hardware clock to UTC
 d-i clock-setup/utc boolean true
@@ -67,10 +66,9 @@ d-i partman-lvm/device_remove_lvm boolean true
 d-i partman-md/device_remove_md boolean true
 d-i partman-lvm/confirm boolean true
 d-i partman-auto-lvm/guided_size string max
-d-i partman-auto-lvm/new_vg_name string debian
+d-i partman-auto-lvm/new_vg_name string basecamp
 d-i partman-auto/disk string /dev/nvme0n1
 d-i partman-auto/choose_recipe select boot-crypto
-
 
 # 512mb EFI, 1G /boot, 8G swap, rest for /
 d-i partman-auto/expert_recipe string \
@@ -111,7 +109,7 @@ d-i partman/confirm boolean true
 d-i partman/confirm_nooverwrite boolean true
 
 ### Package selection
-tasksel tasksel/first multiselect standard mate-desktop laptop
+tasksel tasksel/first multiselect standard xfce-desktop 
 # Individual additional packages to install
 d-i pkgsel/include string git ansible transmission borgbackup shutter calibre mosh caja-admin caja-rename caja-open-terminal curl taskwarrior ledger yt-dlp i3-wm rofi
 d-i pkgsel/upgrade select full-upgrade
@@ -121,7 +119,7 @@ popularity-contest popularity-contest/participate boolean false
 
 ### Bootloader
 d-i grub-installer/only_debian boolean true
-d-i grub-installer/bootdev  string default
+d-i grub-installer/bootdev string default
 
 # ### Finishing up the installation
 # # Avoid that last message about the install being complete.
