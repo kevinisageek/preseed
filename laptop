@@ -2,8 +2,8 @@
 
 ### Localization
 d-i debian-installer/locale string en_GB
-d-i debian-installer/language string en
-d-i debian-installer/country string GB
+#d-i debian-installer/language string en
+#d-i debian-installer/country string GB
 
 ### Keyboard selection
 d-i keyboard-configuration/xkb-keymap select gb
@@ -40,7 +40,6 @@ d-i passwd/root-login boolean false
 d-i passwd/user-fullname string Kevin
 d-i passwd/username string kevin
 
-
 ### Clock and time zone setup
 # Set hardware clock to UTC
 d-i clock-setup/utc boolean true
@@ -68,24 +67,23 @@ d-i partman-md/device_remove_md boolean true
 d-i partman-lvm/confirm boolean true
 d-i partman-auto-lvm/guided_size string max
 d-i partman-auto-lvm/new_vg_name string nomadic
-d-i partman-auto/disk string /dev/sda
+d-i partman-auto/disk string /dev/nvme0n1
 d-i partman-auto/choose_recipe select boot-crypto
-
 
 # 512mb EFI, 1G /boot, 8G swap, rest for /
 d-i partman-auto/expert_recipe string \
 boot-crypto :: \
-  512 50 512 fat32 \
+  512 512 512 fat32 \
           $primary{ } $bootable{ } \
           method{ efi } format{ } \
           mountpoint{ /boot/efi } \
   . \
-  1024 1024 1024 ext4 \
-          $primary{ } $bootable{ } \
-          method{ format } format{ } \
-          use_filesystem{ } filesystem{ ext4 } \
-          mountpoint{ /boot } \
-  . \
+#  1024 1024 1024 ext4 \
+#          $primary{ } $bootable{ } \
+#          method{ format } format{ } \
+#          use_filesystem{ } filesystem{ ext4 } \
+#          mountpoint{ /boot } \
+#  . \
   8192 8192 8192 linux-swap \
           $lvmok{ } lv_name{ swap } \
           in_vg { debian } \
@@ -113,7 +111,7 @@ d-i partman/confirm_nooverwrite boolean true
 ### Package selection
 tasksel tasksel/first multiselect standard mate-desktop laptop
 # Individual additional packages to install
-d-i pkgsel/include string git ansible transmission borgbackup shutter calibre mosh caja-admin caja-rename caja-open-terminal curl taskwarrior ledger yt-dlp i3-wm rofi
+d-i pkgsel/include string git ansible build-essential transmission borgbackup shutter calibre mosh caja-admin caja-rename caja-open-terminal curl taskwarrior ledger yt-dlp i3-wm rofi
 d-i pkgsel/upgrade select full-upgrade
 d-i pkgsel/update-policy select none
 d-i pkgsel/updatedb boolean true
