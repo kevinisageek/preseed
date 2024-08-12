@@ -111,7 +111,7 @@ d-i partman/confirm_nooverwrite boolean true
 ### Package selection
 tasksel tasksel/first multiselect standard mate-desktop laptop
 # Individual additional packages to install
-d-i pkgsel/include string git ansible build-essential transmission borgbackup shutter calibre mosh caja-admin caja-rename caja-open-terminal curl taskwarrior ledger yt-dlp i3-wm rofi
+d-i pkgsel/include string git ansible build-essential
 d-i pkgsel/upgrade select full-upgrade
 d-i pkgsel/update-policy select none
 d-i pkgsel/updatedb boolean true
@@ -119,7 +119,7 @@ popularity-contest popularity-contest/participate boolean false
 
 ### Bootloader
 d-i grub-installer/only_debian boolean true
-d-i grub-installer/bootdev  string default
+d-i grub-installer/bootdev string default
 
 # ### Finishing up the installation
 # # Avoid that last message about the install being complete.
