@@ -70,26 +70,26 @@ d-i partman-auto-lvm/new_vg_name string nomadic
 d-i partman-auto/disk string /dev/nvme0n1
 d-i partman-auto/choose_recipe select boot-crypto
 
-# 512mb EFI, 2G /boot, 8G swap, rest for /
+# 100mb EFI, 2G /boot, 8G swap, rest for /
 d-i partman-auto/expert_recipe string \
 boot-crypto :: \
-  512 512 512 fat32 \
+  100 100 100 fat32 \
           $primary{ } $bootable{ } \
           method{ efi } format{ } \
           mountpoint{ /boot/efi } \
   . \
-  2048 2048 2048 ext4 \
+  2000 2000 2000 ext4 \
           $primary{ } $bootable{ } \
           method{ format } format{ } \
           use_filesystem{ } filesystem{ ext2 } \
           mountpoint{ /boot } \
   . \
-  8192 8192 8192 linux-swap \
+  8000 8000 8000 linux-swap \
           $lvmok{ } lv_name{ swap } \
           in_vg { debian } \
           method{ swap } format{ } \
   . \
-  80896 80896 -1 ext4 \
+  -1 -1 -1 ext4 \
           $lvmok{ } lv_name{ root } \
           in_vg { debian } \
           method{ format } format{ } \
